@@ -6,23 +6,17 @@
 #         self.right = right
 class Solution:
     def deepestLeavesSum(self, root: Optional[TreeNode]) -> int:
-        a=[]
-        b=[]
-        c=[]
-        s=0
-        a.append(root)
-        if not a[0].left and not a[0].right:
-            return a[0].val
-        while a != []:
-            c=b.copy()
-            b=[]
-            for _ in a:
-                if _.left :
-                    b.append(_.left)
-                if _.right:
-                    b.append(_.right)
-            a=b.copy()
-        for _ in c:
-            s += _.val
-        return s
-
+        a=deque()
+        s=[0,0]
+        a.append((root,0))
+        while a:
+            b,l=a.popleft()
+            if b.left :
+                a.append((b.left,l+1))
+                s=[0,l+1]
+            if b.right:
+                a.append((b.right,l+1))
+                s=[0,l+1]
+            if not b.left and not b.right and s[1]==l:
+                s[0]+=b.val
+        return s[0]
