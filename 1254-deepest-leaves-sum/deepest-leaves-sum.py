@@ -11,12 +11,13 @@ class Solution:
         a.append((root,0))
         while a:
             b,l=a.popleft()
-            if b.left :
-                a.append((b.left,l+1))
-                s=[0,l+1]
-            if b.right:
-                a.append((b.right,l+1))
-                s=[0,l+1]
             if not b.left and not b.right and s[1]==l:
                 s[0]+=b.val
+            else:
+                if b.left:
+                    a.append((b.left,l+1))
+                    s=[0,l+1]
+                if b.right:
+                    a.append((b.right,l+1))
+                    s=[0,l+1]
         return s[0]
