@@ -6,14 +6,33 @@
 #         self.right = right
 class Solution:
     def bstToGst(self, root: TreeNode) -> TreeNode:
-        def dst(root):       
-            if not root: return
-            nonlocal s
-            dst(root.right)
-            s += root.val
-            root.val = s
-            dst(root.left)
-        s=0
-        dst(root)
+        # def dst(root):       
+        #     if not root: return
+        #     nonlocal s
+        #     dst(root.right)
+        #     s += root.val
+        #     root.val = s
+        #     dst(root.left)
+        # s=0
+        # dst(root)
+        # return root
+        node_sum = 0
+        st = []
+        node = root
+
+        while st or node is not None:
+
+            while node is not None:
+                st.append(node)
+                node = node.right
+            # Store the top value of stack in node and pop it.
+            node = st.pop()
+
+            # Update value of node.
+            node_sum += node.val
+            node.val = node_sum
+
+            # Move to the left child of node.
+            node = node.left
         return root
                 
