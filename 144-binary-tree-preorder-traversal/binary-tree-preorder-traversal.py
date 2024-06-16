@@ -8,13 +8,9 @@ class Solution:
     def preorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
         l = []
         def preorder(root):
-            nonlocal l 
-            if not root:
-                return
+            if not root:return
             l.append(root.val)
-            if root.left:
-                preorder(root.left)
-            if root.right:
-                preorder(root.right)
+            if root.left: preorder(root.left)
+            if root.right: preorder(root.right)
         preorder(root)
         return l
